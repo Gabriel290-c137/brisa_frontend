@@ -3,7 +3,7 @@
   import { onMount } from 'svelte';
   import { apiClient } from '$lib/services/api.js';
   import type { EsquelaResponse, CodigoEsquela } from '$lib/types/api.js';
-  import CreateEsquelaModal from '$lib/components/CreateEsquelaModal.svelte';
+  import CreateEsquelaModal from '$lib/components/CreateEsquelaModal/CreateEsquelaModal.svelte';
   import { getIconSvg } from '$lib/components/svg';
   let searchQuery = '';
   let esquelas: EsquelaResponse[] = [];
@@ -53,6 +53,7 @@
   });
 
   async function loadCourses() {
+    
     try {
       const data = await apiClient.getCourses();
       courses = Array.isArray(data) ? data : [];

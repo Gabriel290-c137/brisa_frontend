@@ -15,7 +15,9 @@ export interface EsquelaResponse {
   codigos: CodigoEsquela[];
   estudiante?: {
     id_estudiante: number;
-    nombre_completo: string;
+    nombres: string;
+    apellido_paterno: string;
+    apellido_materno: string;
     ci: string;
   };
   curso?: {

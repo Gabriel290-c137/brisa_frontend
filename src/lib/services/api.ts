@@ -194,6 +194,9 @@ class ApiClient {
   async getCourses(): Promise<any> {
     return this.get<any>('/courses/');
   }
+  async getCourseTeachersList(id: number): Promise<any> {
+    return this.get<any>(`/courses/mis_cursos/${id}`);
+  }
 
   async getCourse(id: number): Promise<any> {
     return this.get<any>(`/courses/${id}`);
