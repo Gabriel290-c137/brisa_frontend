@@ -1,0 +1,139 @@
+/* Estilos específicos para Carga Académica */
+
+.expand-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.25rem;
+	display: flex;
+	align-items: center;
+	color: #64748b;
+	transition: color 0.2s;
+}
+
+.expand-btn:hover {
+	color: #334155;
+}
+
+.expanded-row {
+	background-color: #f8fafc;
+}
+
+.expanded-row td {
+	padding: 1.5rem;
+}
+
+.asignaciones-container h4 {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0 0 1rem 0;
+	color: #334155;
+	font-size: 1rem;
+}
+
+.asignaciones-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+}
+
+.asignacion-card {
+	background: white;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 1rem;
+	transition: all 0.2s;
+}
+
+.asignacion-card:hover {
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	border-color: #cbd5e1;
+}
+
+.asignacion-header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+	padding-bottom: 0.75rem;
+	border-bottom: 1px solid #e2e8f0;
+	color: #1e293b;
+}
+
+.asignacion-details {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.detail-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 0.875rem;
+}
+
+.detail-label {
+	color: #64748b;
+	font-weight: 500;
+}
+
+.badge-primary {
+	background-color: #dbeafe;
+	color: #1e40af;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.badge-secondary {
+	background-color: #f3f4f6;
+	color: #4b5563;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.875rem;
+	font-weight: 600;
+}
+
+.telefono-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	color: #3b82f6;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.telefono-link:hover {
+	color: #2563eb;
+	text-decoration: underline;
+}
+
+.telefono-link .icon {
+	width: 1rem;
+	height: 1rem;
+}
+
+.text-muted {
+	color: #9ca3af;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.font-semibold {
+	font-weight: 600;
+	color: #1f2937;
+}
+
+table a {
+	color: #3b82f6;
+	text-decoration: none;
+}
+
+table a:hover {
+	text-decoration: underline;
+}

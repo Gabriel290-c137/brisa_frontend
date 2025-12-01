@@ -3,15 +3,22 @@
 	import './layout.css'
 	import favicon from '$lib/assets/favicon.svg';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { authService } from '$lib/services/auth.js';
 	import { getIconSvg } from '$lib/components/svg.js';
 	
 	let { children } = $props();
 	let isAuthenticated = $state(false);
 	let currentUser = $state<any>(null);
-	let currentPath = $state('');
 	let sidebarCollapsed = $state(false);
+	let reportesManuallyToggled = $state(false);
 	const canManageCodigos = $derived(userIsAdmin(currentUser));
+	
+	// Usar la store $page para obtener la ruta actual reactivamente
+	const currentPath = $derived($page.url.pathname);
+	
+	// Auto-expandir reportes basado en la ruta actual o si fue abierto manualmente
+	const reportesExpanded = $derived(currentPath.startsWith('/reportes') || reportesManuallyToggled);
 
 	const menuItems = [
 		{ label: 'Dashboard', icon: 'dashboard', href: '#' },
@@ -26,13 +33,36 @@
 		{ label: 'Administración', icon: 'settings', href: '#' },
 	];
 
+	const reportesSubmenu = [
+		{ 
+			label: 'Estudiantes',
+			icon: 'graduation-cap',
+			items: [
+				{ label: 'Listado General', href: '/reportes' },
+				{ label: 'Apoderados', href: '/reportes/estudiantes/apoderados' },
+				{ label: 'Contactos', href: '/reportes/estudiantes/contactos' },
+				{ label: 'Distribución Etaria', href: '/reportes/estudiantes/edades' },
+				{ label: 'Historial de Cursos', href: '/reportes/estudiantes/historial' }
+			]
+		},
+		{
+			label: 'Académico',
+			icon: 'book-open',
+			items: [
+				{ label: 'Profesores Asignados', href: '/reportes/academico/profesores' },
+				{ label: 'Materias por Nivel', href: '/reportes/academico/materias' },
+				{ label: 'Carga Académica', href: '/reportes/academico/carga-academica' },
+				{ label: 'Cursos por Gestión', href: '/reportes/academico/cursos-gestion' }
+			]
+		}
+	];
+
 	onMount(() => {
-		currentPath = window.location.pathname;
 		isAuthenticated = authService.isAuthenticated();
 		currentUser = authService.getUserData();
 
 		// Proteger rutas
-		if (!isAuthenticated && currentPath !== '/login') {
+		if (!isAuthenticated && $page.url.pathname !== '/login') {
 			window.location.href = '/login';
 		}
 	});
@@ -52,6 +82,15 @@
 
 	function toggleSidebar() {
 		sidebarCollapsed = !sidebarCollapsed;
+	}
+
+	function toggleReportes() {
+		if (!currentPath.startsWith('/reportes')) {
+			reportesManuallyToggled = !reportesManuallyToggled;
+		}
+		if (sidebarCollapsed) {
+			sidebarCollapsed = false;
+		}
 	}
 </script>
 
@@ -93,6 +132,7 @@
 						{/if}
 					</a>
 				{/each}
+				
 				{#if canManageCodigos}
 					<a 
 						href="/codigos" 
@@ -105,17 +145,48 @@
 							<span class="nav-label">Códigos Esquelas</span>
 						{/if}
 					</a>
-					<a 
-						href="/reportes" 
-						class="nav-item" 
-						class:active={currentPath.startsWith('/reportes')}
-						title="Reportes"
-					>
-						<span class="nav-icon">{@html getIconSvg('bar-chart')}</span>
-						{#if !sidebarCollapsed}
-							<span class="nav-label">Reportes</span>
+					
+					<!-- Menú expandible de Reportes -->
+					<div class="nav-item-group">
+						<button 
+							class="nav-item nav-item-expandable" 
+							class:active={currentPath.startsWith('/reportes')}
+							onclick={toggleReportes}
+							title="Reportes"
+						>
+							<span class="nav-icon">{@html getIconSvg('bar-chart')}</span>
+							{#if !sidebarCollapsed}
+								<span class="nav-label">Reportes</span>
+								<span class="expand-icon" class:expanded={reportesExpanded}>
+									{@html getIconSvg(reportesExpanded ? 'chevron-down' : 'chevron-right')}
+								</span>
+							{/if}
+						</button>
+						
+						{#if reportesExpanded && !sidebarCollapsed}
+							<div class="submenu">
+								{#each reportesSubmenu as section}
+									<div class="submenu-section">
+										<div class="submenu-section-header">
+											<span class="submenu-icon">{@html getIconSvg(section.icon)}</span>
+											<span class="submenu-label">{section.label}</span>
+										</div>
+										<div class="submenu-items">
+											{#each section.items as subItem}
+												<a 
+													href={subItem.href} 
+													class="submenu-item"
+													class:active={currentPath === subItem.href}
+												>
+													{subItem.label}
+												</a>
+											{/each}
+										</div>
+									</div>
+								{/each}
+							</div>
 						{/if}
-					</a>
+					</div>
 				{/if}
 			</nav>
 

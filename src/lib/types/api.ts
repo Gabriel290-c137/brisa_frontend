@@ -280,3 +280,75 @@ export interface HistorialCursosResponseDTO {
   total_estudiantes: number;
   historiales: EstudianteHistorialItem[];
 }
+
+// Reporte: Profesores Asignados
+export interface ProfesorAsignadoDTO {
+  id_profesor: number;
+  ci: string;
+  nombre_completo: string;
+  telefono: string | null;
+  correo: string | null;
+  curso: string;
+  materia: string;
+}
+
+export interface ProfesoresAsignadosResponseDTO {
+  profesores: ProfesorAsignadoDTO[];
+  total: number;
+  curso: string | null;
+  materia: string | null;
+}
+
+// Reporte: Materias por Nivel
+export interface MateriaPorNivelDTO {
+  id_materia: number;
+  nombre_materia: string;
+  nivel: string;
+}
+
+export interface MateriasPorNivelResponseDTO {
+  materias: MateriaPorNivelDTO[];
+  total: number;
+  nivel: string | null;
+}
+
+// Reporte: Carga Académica
+export interface AsignacionProfesorDTO {
+  curso: string;
+  nivel: string;
+  gestion: string;
+  materia: string;
+}
+
+export interface CargaAcademicaProfesorDTO {
+  id_profesor: number;
+  ci: string;
+  nombre_completo: string;
+  telefono: string | null;
+  correo: string | null;
+  asignaciones: AsignacionProfesorDTO[];
+  total_asignaciones: number;
+  cursos_distintos: number;
+  materias_distintas: number;
+}
+
+export interface CargaAcademicaResponseDTO {
+  profesores: CargaAcademicaProfesorDTO[];
+  total_profesores: number;
+}
+
+// Reporte: Cursos por Gestión
+export interface CursoPorGestionDTO {
+  id_curso: number;
+  nombre_curso: string;
+  nivel: string;
+  gestion: string;
+  total_estudiantes: number;
+}
+
+export interface CursosPorGestionResponseDTO {
+  cursos: CursoPorGestionDTO[];
+  total: number;
+  gestion: string | null;
+  nivel: string | null;
+}

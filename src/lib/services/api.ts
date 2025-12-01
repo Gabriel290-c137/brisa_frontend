@@ -15,7 +15,11 @@ import type {
   EstudiantesApoderadosResponseDTO,
   ContactosApoderadosResponseDTO,
   DistribucionEdadResponseDTO,
-  HistorialCursosResponseDTO
+  HistorialCursosResponseDTO,
+  ProfesoresAsignadosResponseDTO,
+  MateriasPorNivelResponseDTO,
+  CargaAcademicaResponseDTO,
+  CursosPorGestionResponseDTO
 } from '../types/api.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -297,6 +301,53 @@ class ApiClient {
   async getReporteHistorialCursos(estudiante_id?: number): Promise<HistorialCursosResponseDTO> {
     const qs = this.buildQuery({ estudiante_id });
     return this.get<HistorialCursosResponseDTO>(`/reports/students/course-history${qs}`);
+  }
+
+  /**
+   * Obtiene profesores asignados por curso y materia.
+   * @param params - Filtros opcionales: curso_id, materia_id, nivel, gestion
+   */
+  async getReporteProfesoresAsignados(params?: {
+    curso_id?: number;
+    materia_id?: number;
+    nivel?: 'inicial' | 'primaria' | 'secundaria';
+    gestion?: string;
+  }): Promise<ProfesoresAsignadosResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<ProfesoresAsignadosResponseDTO>(`/reports/academic/professors${qs}`);
+  }
+
+  /**
+   * Obtiene materias por nivel educativo.
+   * @param nivel - Nivel educativo (opcional: 'inicial', 'primaria', 'secundaria')
+   */
+  async getReporteMateriasPorNivel(nivel?: 'inicial' | 'primaria' | 'secundaria'): Promise<MateriasPorNivelResponseDTO> {
+    const qs = this.buildQuery({ nivel });
+    return this.get<MateriasPorNivelResponseDTO>(`/reports/academic/subjects${qs}`);
+  }
+
+  /**
+   * Obtiene carga académica de profesores.
+   * @param params - Filtros opcionales: profesor_id, gestion
+   */
+  async getReporteCargaAcademica(params?: {
+    profesor_id?: number;
+    gestion?: string;
+  }): Promise<CargaAcademicaResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<CargaAcademicaResponseDTO>(`/reports/academic/workload${qs}`);
+  }
+
+  /**
+   * Obtiene cursos por gestión con cantidad de estudiantes.
+   * @param params - Filtros opcionales: gestion, nivel
+   */
+  async getReporteCursosPorGestion(params?: {
+    gestion?: string;
+    nivel?: 'inicial' | 'primaria' | 'secundaria';
+  }): Promise<CursosPorGestionResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<CursosPorGestionResponseDTO>(`/reports/academic/courses${qs}`);
   }
 }
 

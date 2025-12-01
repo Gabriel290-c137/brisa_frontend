@@ -1,0 +1,48 @@
+/* Estilos específicos para Profesores Asignados */
+
+.telefono-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	color: #3b82f6;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.telefono-link:hover {
+	color: #2563eb;
+	text-decoration: underline;
+}
+
+.telefono-link .icon {
+	width: 1rem;
+	height: 1rem;
+}
+
+.badge-primary {
+	background-color: #dbeafe;
+	color: #1e40af;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.text-muted {
+	color: #9ca3af;
+}
+
+table a {
+	color: #3b82f6;
+	text-decoration: none;
+}
+
+table a:hover {
+	text-decoration: underline;
+}
+
+.font-semibold {
+	font-weight: 600;
+	color: #1f2937;
+}

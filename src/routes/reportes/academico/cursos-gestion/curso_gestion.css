@@ -1,0 +1,93 @@
+/* Estilos específicos para Cursos por Gestión */
+
+.badge {
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.badge-success {
+	background-color: #d1fae5;
+	color: #065f46;
+}
+
+.badge-warning {
+	background-color: #fef3c7;
+	color: #92400e;
+}
+
+.badge-info {
+	background-color: #dbeafe;
+	color: #1e40af;
+}
+
+.badge-secondary {
+	background-color: #f3f4f6;
+	color: #4b5563;
+}
+
+.badge-primary {
+	background-color: #dbeafe;
+	color: #1e40af;
+}
+
+.font-semibold {
+	font-weight: 600;
+	color: #1f2937;
+}
+
+.text-muted {
+	color: #9ca3af;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.stat-card {
+	background: white;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	padding: 1.5rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	transition: all 0.2s;
+}
+
+.stat-card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	transform: translateY(-2px);
+}
+
+.stat-icon {
+	width: 3rem;
+	height: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	border-radius: 12px;
+	color: white;
+}
+
+.stat-info {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.stat-label {
+	font-size: 0.875rem;
+	color: #6b7280;
+	font-weight: 500;
+}
+
+.stat-value {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #1f2937;
+}
