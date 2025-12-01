@@ -23,7 +23,6 @@
 		{ label: 'Retiros Tempranos', icon: 'clock', href: '#' },
 		{ label: 'Incidentes', icon: 'alert-triangle', href: '#' },
 		{ label: 'Esquelas', icon: 'clipboard-list', href: '/esquelas' },
-		{ label: 'Reportes', icon: 'bar-chart', href: '#' },
 		{ label: 'Administración', icon: 'settings', href: '#' },
 	];
 
@@ -104,6 +103,17 @@
 						<span class="nav-icon">{@html getIconSvg('code')}</span>
 						{#if !sidebarCollapsed}
 							<span class="nav-label">Códigos Esquelas</span>
+						{/if}
+					</a>
+					<a 
+						href="/reportes" 
+						class="nav-item" 
+						class:active={currentPath.startsWith('/reportes')}
+						title="Reportes"
+					>
+						<span class="nav-icon">{@html getIconSvg('bar-chart')}</span>
+						{#if !sidebarCollapsed}
+							<span class="nav-label">Reportes</span>
 						{/if}
 					</a>
 				{/if}

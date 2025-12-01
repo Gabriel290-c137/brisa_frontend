@@ -189,3 +189,94 @@ export interface StandardApiResponse<T = any> {
   data?: T;
   error_details?: any;
 }
+
+// ================================
+// Tipos para Reportes de Estudiantes
+// ================================
+
+// Reporte: Listado de estudiantes
+export interface EstudianteListadoItem {
+  id_estudiante: number;
+  ci: string;
+  nombre_completo: string;
+  fecha_nacimiento: string | null;
+  edad: number | null;
+  cursos: string[];
+}
+
+export interface EstudianteListadoDTO {
+  total: number;
+  curso: number | null;
+  nivel: string | null;
+  gestion: string | null;
+  estudiantes: EstudianteListadoItem[];
+}
+
+// Reporte: Estudiantes con/sin apoderados
+export interface ApoderadoInfo {
+  tipo: 'padre' | 'madre';
+  nombre_completo: string;
+  telefono: string;
+}
+
+export interface EstudianteApoderadoItem {
+  id_estudiante: number;
+  nombre_completo: string;
+  ci: string;
+  apoderados: ApoderadoInfo[];
+  tiene_apoderados: boolean;
+}
+
+export interface EstudiantesApoderadosResponseDTO {
+  total: number;
+  con_apoderados: number | null;
+  estudiantes: EstudianteApoderadoItem[];
+}
+
+// Reporte: Contactos de apoderados
+export interface ContactoApoderadoItem {
+  id_estudiante: number;
+  estudiante_nombre: string;
+  estudiante_ci: string;
+  tipo_apoderado: 'padre' | 'madre';
+  apoderado_nombre: string;
+  telefono: string;
+}
+
+export interface ContactosApoderadosResponseDTO {
+  total: number;
+  contactos: ContactoApoderadoItem[];
+}
+
+// Reporte: Distribución por edad
+export interface RangoEdadItem {
+  rango_edad: string;
+  cantidad: number;
+  porcentaje: number;
+}
+
+export interface DistribucionEdadResponseDTO {
+  total_estudiantes: number;
+  distribucion: RangoEdadItem[];
+}
+
+// Reporte: Historial de cursos
+export interface CursoHistorialItem {
+  id_curso: number;
+  nombre_curso: string;
+  nivel: string;
+  gestion: string;
+}
+
+export interface EstudianteHistorialItem {
+  id_estudiante: number;
+  nombre_completo: string;
+  ci: string;
+  cursos: CursoHistorialItem[];
+  total_cursos: number;
+}
+
+export interface HistorialCursosResponseDTO {
+  total_estudiantes: number;
+  historiales: EstudianteHistorialItem[];
+}

@@ -10,7 +10,12 @@ import type {
   TipoCodigoEsquela,
   Estudiante,
   Profesor,
-  Registrador
+  Registrador,
+  EstudianteListadoDTO,
+  EstudiantesApoderadosResponseDTO,
+  ContactosApoderadosResponseDTO,
+  DistribucionEdadResponseDTO,
+  HistorialCursosResponseDTO
 } from '../types/api.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -231,6 +236,67 @@ class ApiClient {
   async getReportsRanking(params: Record<string, any>): Promise<any> {
     const qs = this.buildQuery(params);
     return this.get<any>(`/reports/ranking${qs}`);
+  }
+
+  // ================================
+  // Reportes de Estudiantes
+  // ================================
+  
+  /**
+   * Obtiene listado de estudiantes filtrado por curso, nivel y/o gestión.
+   * @param params - Filtros opcionales: curso_id, nivel, gestion
+   */
+  async getReporteEstudiantes(params?: {
+    curso_id?: number;
+    nivel?: 'inicial' | 'primaria' | 'secundaria';
+    gestion?: string;
+  }): Promise<EstudianteListadoDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<EstudianteListadoDTO>(`/reports/students${qs}`);
+  }
+
+  /**
+   * Obtiene estudiantes con o sin apoderados registrados.
+   * @param con_apoderados - true: con apoderados, false: sin apoderados, null/undefined: todos
+   */
+  async getReporteEstudiantesApoderados(con_apoderados?: boolean): Promise<EstudiantesApoderadosResponseDTO> {
+    const qs = this.buildQuery({ con_apoderados });
+    return this.get<EstudiantesApoderadosResponseDTO>(`/reports/students/guardians${qs}`);
+  }
+
+  /**
+   * Obtiene datos de contacto de apoderados (padres/madres).
+   * @param params - Filtros opcionales: curso_id, nivel, gestion
+   */
+  async getReporteContactosApoderados(params?: {
+    curso_id?: number;
+    nivel?: 'inicial' | 'primaria' | 'secundaria';
+    gestion?: string;
+  }): Promise<ContactosApoderadosResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<ContactosApoderadosResponseDTO>(`/reports/students/guardian-contacts${qs}`);
+  }
+
+  /**
+   * Obtiene distribución de estudiantes por rangos de edad.
+   * @param params - Filtros opcionales: curso_id, nivel, gestion
+   */
+  async getReporteDistribucionEdad(params?: {
+    curso_id?: number;
+    nivel?: 'inicial' | 'primaria' | 'secundaria';
+    gestion?: string;
+  }): Promise<DistribucionEdadResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<DistribucionEdadResponseDTO>(`/reports/students/age-distribution${qs}`);
+  }
+
+  /**
+   * Obtiene historial de cursos por estudiante.
+   * @param estudiante_id - ID del estudiante (opcional, si no se especifica retorna todos)
+   */
+  async getReporteHistorialCursos(estudiante_id?: number): Promise<HistorialCursosResponseDTO> {
+    const qs = this.buildQuery({ estudiante_id });
+    return this.get<HistorialCursosResponseDTO>(`/reports/students/course-history${qs}`);
   }
 }
 
