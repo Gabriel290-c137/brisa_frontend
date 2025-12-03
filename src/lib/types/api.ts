@@ -352,3 +352,62 @@ export interface CursosPorGestionResponseDTO {
   gestion: string | null;
   nivel: string | null;
 }
+
+// ================================
+// Reportes de Esquelas
+// ================================
+
+// Reporte: Esquelas por Profesor
+export interface EsquelaDetalleDTO {
+  id_esquela: number;
+  fecha: string;
+  estudiante_nombre: string;
+  estudiante_ci: string;
+  profesor_nombre: string;
+  registrador_nombre: string;
+  codigos: string[];
+  observaciones: string | null;
+}
+
+export interface ProfesorEsquelasDTO {
+  id_profesor: number;
+  profesor_nombre: string;
+  profesor_ci: string;
+  total_esquelas: number;
+  reconocimientos: number;
+  orientaciones: number;
+  esquelas: EsquelaDetalleDTO[];
+}
+
+export interface EsquelasPorProfesorResponseDTO {
+  profesores: ProfesorEsquelasDTO[];
+  total_profesores: number;
+  total_esquelas: number;
+}
+
+// Reporte: Esquelas por Fecha
+export interface EsquelasPorFechaResponseDTO {
+  esquelas: EsquelaDetalleDTO[];
+  total: number;
+  fecha_desde: string | null;
+  fecha_hasta: string | null;
+  reconocimientos: number;
+  orientaciones: number;
+}
+
+// Reporte: Códigos Frecuentes
+export interface CodigoFrecuenteDTO {
+  id_codigo: number;
+  codigo: string;
+  descripcion: string;
+  tipo: 'reconocimiento' | 'orientacion';
+  total_aplicaciones: number;
+  porcentaje: number;
+}
+
+export interface CodigosFrecuentesResponseDTO {
+  codigos: CodigoFrecuenteDTO[];
+  total_codigos: number;
+  total_aplicaciones: number;
+  tipo: 'reconocimiento' | 'orientacion' | null;
+}

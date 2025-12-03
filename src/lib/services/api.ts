@@ -19,7 +19,10 @@ import type {
   ProfesoresAsignadosResponseDTO,
   MateriasPorNivelResponseDTO,
   CargaAcademicaResponseDTO,
-  CursosPorGestionResponseDTO
+  CursosPorGestionResponseDTO,
+  EsquelasPorProfesorResponseDTO,
+  EsquelasPorFechaResponseDTO,
+  CodigosFrecuentesResponseDTO
 } from '../types/api.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -348,6 +351,50 @@ class ApiClient {
   }): Promise<CursosPorGestionResponseDTO> {
     const qs = this.buildQuery(params);
     return this.get<CursosPorGestionResponseDTO>(`/reports/academic/courses${qs}`);
+  }
+
+  // ================================
+  // Reportes de Esquelas
+  // ================================
+
+  /**
+   * Obtiene esquelas agrupadas por profesor emisor.
+   * @param params - Filtros opcionales: profesor_id, from, to
+   */
+  async getReporteEsquelasPorProfesor(params?: {
+    profesor_id?: number;
+    from?: string;
+    to?: string;
+  }): Promise<EsquelasPorProfesorResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<EsquelasPorProfesorResponseDTO>(`/reports/esquelas/by-professor${qs}`);
+  }
+
+  /**
+   * Obtiene esquelas por rango de fechas.
+   * @param params - Filtros opcionales: from, to, tipo
+   */
+  async getReporteEsquelasPorFecha(params?: {
+    from?: string;
+    to?: string;
+    tipo?: 'reconocimiento' | 'orientacion';
+  }): Promise<EsquelasPorFechaResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<EsquelasPorFechaResponseDTO>(`/reports/esquelas/by-date${qs}`);
+  }
+
+  /**
+   * Obtiene los códigos de esquelas más frecuentemente aplicados.
+   * @param params - Filtros opcionales: tipo, limit, from, to
+   */
+  async getReporteCodigosFrecuentes(params?: {
+    tipo?: 'reconocimiento' | 'orientacion';
+    limit?: number;
+    from?: string;
+    to?: string;
+  }): Promise<CodigosFrecuentesResponseDTO> {
+    const qs = this.buildQuery(params);
+    return this.get<CodigosFrecuentesResponseDTO>(`/reports/esquelas/frequent-codes${qs}`);
   }
 }
 

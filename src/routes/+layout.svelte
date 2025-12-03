@@ -54,6 +54,15 @@
 				{ label: 'Carga Académica', href: '/reportes/academico/carga-academica' },
 				{ label: 'Cursos por Gestión', href: '/reportes/academico/cursos-gestion' }
 			]
+		},
+		{
+			label: 'Esquelas',
+			icon: 'clipboard-list',
+			items: [
+				{ label: 'Por Emisor', href: '/reportes/esquelas/por-emisor' },
+				{ label: 'Por Rango de Fechas', href: '/reportes/esquelas/por-fecha' },
+				{ label: 'Códigos Frecuentes', href: '/reportes/esquelas/codigos-frecuentes' }
+			]
 		}
 	];
 

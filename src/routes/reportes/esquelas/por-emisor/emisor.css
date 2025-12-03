@@ -1,0 +1,70 @@
+	@import '../../page.css';
+	
+	.profesor-card {
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		margin-bottom: 1rem;
+		overflow: hidden;
+	}
+	
+	.profesor-header {
+		background: #f9fafb;
+		padding: 1rem;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		transition: background 0.2s;
+	}
+	
+	.profesor-header:hover {
+		background: #f3f4f6;
+	}
+	
+	.profesor-info h3 {
+		margin: 0 0 0.25rem 0;
+		font-size: 1.125rem;
+		color: #1f2937;
+	}
+	
+	.profesor-info p {
+		margin: 0;
+		font-size: 0.875rem;
+		color: #6b7280;
+	}
+	
+	.profesor-stats {
+		display: flex;
+		align-items: center;
+	}
+	
+	.expand-icon {
+		width: 20px;
+		height: 20px;
+		color: #6b7280;
+	}
+	
+	.esquelas-list {
+		padding: 1rem;
+		background: white;
+	}
+	
+	.esquelas-list table {
+		width: 100%;
+		margin: 0;
+	}
+	
+	.codigos-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+	
+	.codigo-tag {
+		background: #e5e7eb;
+		color: #374151;
+		padding: 0.125rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.75rem;
+		white-space: nowrap;
+	}

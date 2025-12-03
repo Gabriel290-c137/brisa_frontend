@@ -1,0 +1,44 @@
+	@import '../../page.css';
+	
+	.rank {
+		font-weight: 700;
+		font-size: 1.25rem;
+		color: #3b82f6;
+		text-align: center;
+	}
+	
+	.codigo-cell {
+		font-family: 'Courier New', monospace;
+		font-weight: 600;
+		background: #f3f4f6;
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+	}
+	
+	.aplicaciones {
+		font-weight: 600;
+		color: #1f2937;
+		text-align: right;
+	}
+	
+	.porcentaje {
+		font-weight: 600;
+		color: #3b82f6;
+		text-align: right;
+	}
+	
+	.progress-bar {
+		width: 100%;
+		height: 24px;
+		background: #f3f4f6;
+		border-radius: 4px;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+		transition: width 0.3s ease;
+		border-radius: 4px;
+	}
