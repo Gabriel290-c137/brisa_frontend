@@ -100,19 +100,33 @@
 
       console.log('🔍 Cargando esquelas con params:', params);
 
-      const [esquelasData, codigosData] = await Promise.all([
+      // 1. Petición inicial para obtener datos y el total
+      const [initialResponse, codigosData] = await Promise.all([
         apiClient.getEsquelas(params),
         apiClient.getCodigosEsquelas()
       ]);
-      // Handle paginated response structure
-      if (esquelasData && esquelasData.data) {
-        esquelas = Array.isArray(esquelasData.data) ? esquelasData.data : [];
-      } else if (Array.isArray(esquelasData)) {
-        esquelas = esquelasData;
-      } else {
-        esquelas = [];
+
+      let finalEsquelas = [];
+
+      // Lógica de paginación: Si hay más registros que el page_size actual, pedimos todo
+      if (initialResponse && initialResponse.total && initialResponse.data) {
+        const { total, page_size } = initialResponse;
+        
+        if (total > page_size) {
+          console.log(`Detectados ${total} registros (page_size: ${page_size}). Pidiendo todo...`);
+          const allParams = { ...params, page_size: total };
+          const fullResponse = await apiClient.getEsquelas(allParams);
+          finalEsquelas = fullResponse.data || [];
+        } else {
+          finalEsquelas = initialResponse.data;
+        }
+      } else if (Array.isArray(initialResponse)) {
+        finalEsquelas = initialResponse;
       }
-      console.log('Esquelas data sample:', esquelas[0]); // Debug: ver estructura completa
+
+      esquelas = Array.isArray(finalEsquelas) ? finalEsquelas : [];
+      console.log('Total esquelas cargadas:', esquelas.length);
+      
       codigos = Array.isArray(codigosData) ? codigosData : [];
       error = '';
     } catch (err: any) {
