@@ -338,7 +338,7 @@
         <div class="top-bar-actions">
           <button class="action-btn notification-btn">
             {@html getIconSvg("bell")}
-            <span class="badge">3</span>
+            <span class="notification-badge">3</span>
           </button>
           <button class="user-profile" onclick={goToProfile}>
             <div class="avatar">
